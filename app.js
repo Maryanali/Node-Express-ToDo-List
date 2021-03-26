@@ -2,23 +2,19 @@
 
 const express =require("express");
 const bodyParser = require("body-parser");
+const date = require(__dirname + "/date.js");//requiring a module
 const app= express();
-var items= [];//an array so we can append the item to the array.
+let items= [];//an array so we can append the item to the array.
 let workItems = [];
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
+
 app.get("/", function(req, res){
 
-var today = new Date();
-var options = {
-    weekday: "long",
-    day: "numeric",
-    month: "long"
-};
-var day = today.toLocaleDateString("en-US", options);
-res.render("list", {listTitle: day, newListItems: items});
+ let day = date();
+ res.render("list", {listTitle: day, newListItems: items});
 
 });
 //handle post requests to the home route
