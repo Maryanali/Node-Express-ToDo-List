@@ -14,6 +14,7 @@ app.use(express.static("public"));
 app.get("/", function(req, res){
 
  let day = date();
+ // let day = date.getDate(); if there was more than one function in the module.
  res.render("list", {listTitle: day, newListItems: items});
 
 });
